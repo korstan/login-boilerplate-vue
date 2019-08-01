@@ -27,7 +27,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .login-form {
-  max-width: 270px;
+  max-width: 300px;
   margin: 0 auto;
   padding: 10px;
   display: flex;
@@ -37,18 +37,7 @@ export default {
   border: 10px solid #42b983;
   border-radius: 5%;
 }
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+  .login-form > input {
+    margin: 10px;
+  }
 </style>
