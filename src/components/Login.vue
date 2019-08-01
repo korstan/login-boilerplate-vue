@@ -2,9 +2,15 @@
   <div class="login-form">
     <h1>{{ msg }}</h1>
     <label for="input-login">Login</label>
-    <input id="input-login" type="text">
+    <input
+      id="input-login"
+      type="text"
+    />
     <label for="input-password">Password</label>
-    <input id="input-password" type="text">
+    <input
+      id="input-password"
+      type="text"
+    />
     <button type="submit">Sign In</button>
   </div>
 </template>
@@ -15,7 +21,7 @@ export default {
   props: {
     msg: String
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -29,7 +35,7 @@ export default {
   align-items: center;
   justify-content: center;
   border: 10px solid #42b983;
-  border-radius: 5%
+  border-radius: 5%;
 }
 h3 {
   margin: 40px 0 0;

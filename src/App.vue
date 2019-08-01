@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-    <Login msg="Login Boilerplate Vue"/>
+    <Login msg="Login Boilerplate Vue" />
   </div>
 </template>
 
 <script>
-import Login from './components/Login.vue'
+import Login from './components/Login.vue';
 
 export default {
   name: 'app',
   components: {
     Login
   }
-}
+};
 </script>
 
 <style>
