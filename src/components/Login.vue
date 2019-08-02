@@ -59,6 +59,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .login-form {
+  background-color: #42b983;
   height: 350px;
   max-width: 300px;
   margin: 0 auto;
@@ -67,9 +68,9 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  border: 10px solid #42b983;
   border-radius: 5%;
   transition: height 0.5s;
+
 }
 
 .expanded.login-form {
