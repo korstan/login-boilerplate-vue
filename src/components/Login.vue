@@ -1,32 +1,36 @@
 <template>
   <form
-    @submit="signIn"
+    @submit="isExpanded ? signUp() : signIn()"
     class="login-form"
     v-bind:class="{expanded: isExpanded}"
   >
     <h1>{{ msg }}</h1>
     <label for="input-login">Login</label>
     <input
-      v-model="signInCredentials.username"
+      v-model="credentials.username"
       id="input-login"
       type="text"
     />
     <label for="input-password">Password</label>
     <input
-      v-model="signInCredentials.password"
+      v-model="credentials.password"
       id="input-password"
       type="password"
     />
     <transition name="fade">
-    <input
-      v-if="this.isExpanded"
-      placeholder="Type password again"
-      id="input-password-repeat"
-      type="text"
-    />
+      <input
+        v-if="this.isExpanded"
+        v-model="repeatedPassword"
+        placeholder="Type password again"
+        id="input-password-repeat"
+        type="text"
+      />
     </transition>
-    <button type="submit">Sign In</button>
-    <a v-on:click="isExpanded = !isExpanded">Sign Up</a>
+    <button type="submit">{{buttonText}}</button>
+    <a
+      v-if="!isExpanded"
+      v-on:click="expand()"
+    >Sign Up</a>
   </form>
 </template>
 
@@ -42,15 +46,32 @@ export default {
   data() {
     return {
       isExpanded: false,
-      signInCredentials: {
+      buttonText: 'Sign In',
+      credentials: {
         username: '',
         password: ''
-      }
+      },
+      repeatedPassword: ''
     };
   },
   methods: {
+    collapse() {
+      this.isExpanded = false;
+      this.buttonText = 'Sign In';
+    },
+    expand() {
+      this.isExpanded = true;
+      this.buttonText = 'Sign Up';
+    },
     signIn() {
-      axios.post(AppConfig.signInEndpoint, this.signInCredentials).then((body) => body);
+      axios.post(AppConfig.signInEndpoint, this.credentials).then(body => body);
+    },
+    signUp() {
+      if (this.repeatedPassword === this.credentials.password) {
+        axios
+          .post(AppConfig.signUpEndpoint, this.credentials)
+          .then(() => this.collapse());
+      }
     }
   }
 };
@@ -70,7 +91,6 @@ export default {
   justify-content: flex-start;
   border-radius: 5%;
   transition: height 0.5s;
-
 }
 
 .expanded.login-form {
@@ -78,10 +98,12 @@ export default {
   transition: height 0.5s;
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 
