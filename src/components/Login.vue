@@ -17,7 +17,7 @@
       id="input-password"
       type="password"
     />
-    <transition name="fade">
+    <transition name="fade-repeat-pass">
       <input
         v-if="this.isExpanded"
         v-model="repeatedPassword"
@@ -27,7 +27,7 @@
       />
     </transition>
     <button type="submit">{{buttonText}}</button>
-    <transition name="fade">
+    <transition name="fade-sign-up">
       <a
         v-if="!isExpanded"
         v-on:click="expand()"
@@ -94,18 +94,31 @@ export default {
   border-radius: 5%;
   transition: height 0.5s;
 }
-
+/* Expanding animation */
 .expanded.login-form {
   height: 400px;
   transition: height 0.5s;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
+/* Repeat password input disappearing */
+.fade-repeat-pass-leave-active {
+  transition: opacity 0.25s;
 }
-.fade-enter,
-.fade-leave-to {
+/* Sign up and repeat password appearing */
+.fade-repeat-pass-enter-active,
+.fade-sign-up-enter-active {
+  transition: opacity 0.5s;
+  transition-delay: 0.5s;
+}
+/* Sign up disappearing */
+.fade-sign-up-leave-active {
+  /* transition: opacity 0.01s ; */
+}
+/* Animation prop */
+.fade-repeat-pass-enter,
+.fade-repeat-pass-leave-to,
+.fade-sign-up-enter,
+.fade-sign-up-leave-to {
   opacity: 0;
 }
 
