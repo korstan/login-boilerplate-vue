@@ -27,10 +27,12 @@
       />
     </transition>
     <button type="submit">{{buttonText}}</button>
-    <a
-      v-if="!isExpanded"
-      v-on:click="expand()"
-    >Sign Up</a>
+    <transition name="fade">
+      <a
+        v-if="!isExpanded"
+        v-on:click="expand()"
+      >Sign Up</a>
+    </transition>
   </form>
 </template>
 
