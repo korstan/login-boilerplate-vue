@@ -7,27 +7,31 @@
     <h1>{{ msg }}</h1>
     <label for="input-login">Login</label>
     <input
+      v-model="signInCredentials.username"
       id="input-login"
       type="text"
     />
     <label for="input-password">Password</label>
     <input
+      v-model="signInCredentials.password"
       id="input-password"
-      type="text"
+      type="password"
     />
+    <transition name="fade">
     <input
       v-if="this.isExpanded"
       placeholder="Type password again"
-      id="input-password"
+      id="input-password-repeat"
       type="text"
     />
+    </transition>
     <button type="submit">Sign In</button>
     <a v-on:click="isExpanded = !isExpanded">Sign Up</a>
   </form>
 </template>
 
 <script>
-//import axios from 'axios';
+import axios from 'axios';
 import AppConfig from '../config/app-config';
 
 export default {
@@ -37,11 +41,17 @@ export default {
   },
   data() {
     return {
-      isExpanded: false
+      isExpanded: false,
+      signInCredentials: {
+        username: '',
+        password: ''
+      }
     };
   },
   methods: {
-    signIn() {}
+    signIn() {
+      axios.post(AppConfig.signInEndpoint, this.signInCredentials).then((body) => body);
+    }
   }
 };
 </script>
@@ -67,8 +77,16 @@ export default {
   transition: height 0.5s;
 }
 
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+}
+
 .login-form > input {
   margin: 10px;
+  text-align: center;
 }
 
 .login-form > button {

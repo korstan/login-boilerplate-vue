@@ -1,3 +1,3 @@
 module.exports = {
-  signInEndpoint: ''
+  signInEndpoint: 'http://localhost:3000/api/auth/login'
 };
