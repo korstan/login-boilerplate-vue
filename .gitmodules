@@ -1,0 +1,3 @@
+[submodule "nortska-api"]
+	path = nortska-api
+	url = git@github.com:korstan/nortska-api-express.git
