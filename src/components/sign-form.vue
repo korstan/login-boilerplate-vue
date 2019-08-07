@@ -47,14 +47,17 @@ export default {
     };
   },
   methods: {
+    // Toggling between 'sign up' mode and 'sign in' mode
     toggleSignMode() {
       this.isExpanded = !this.isExpanded;
     },
+    // Dispatching sign in action from store, ((routing on home page and)) catching error
     signIn() {
       this.$store
         .dispatch('signIn', this.credentials)
         .catch(error => alert(error.message));
     },
+    // Dispatching sign up action from store, ((routing on home page and)) catching error
     signUp() {
       if (this.repeatedPassword === this.credentials.password) {
         this.$store
